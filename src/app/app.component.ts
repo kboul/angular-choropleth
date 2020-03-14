@@ -11,15 +11,15 @@ export class AppComponent implements OnInit {
 	constructor(private http: HttpClient) {}
 
 	ngOnInit() {
-		let myfrugalmap;
+		let map;
 		let geojson;
 
-		myfrugalmap = L.map("frugalmap").setView([47.482019, -2], 7.5);
+		map = L.map("map").setView([47.482019, -2], 7.5);
 
 		L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 			id: "mapbox.light",
 			attribution: "SOS"
-		}).addTo(myfrugalmap);
+		}).addTo(map);
 
 		let info;
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 				(props ? "<b>" + props.nom + "</b><br />" : "");
 		};
 
-		info.addTo(myfrugalmap);
+		info.addTo(map);
 
 		function resetHighlight(e) {
 			geojson.resetStyle(e.target);
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 		}
 
 		function zoomToFeature(e) {
-			myfrugalmap.fitBounds(e.target.getBounds());
+			map.fitBounds(e.target.getBounds());
 		}
 
 		function highlightFeature(e) {
@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
 						click: zoomToFeature
 					});
 				}
-			}).addTo(myfrugalmap);
+			}).addTo(map);
 		});
 	}
 }
