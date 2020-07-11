@@ -11,8 +11,8 @@ export class AppComponent implements OnInit {
 	constructor(private http: HttpClient) {}
 
 	ngOnInit() {
-		let map;
-		let geojson;
+		let map: L.Map;
+		let geojson: L.GeoJSON;
 
 		map = L.map("map").setView([47.482019, -2], 7.5);
 
@@ -25,13 +25,13 @@ export class AppComponent implements OnInit {
 
 		info = new L.Control();
 
-		info.onAdd = function() {
+		info.onAdd = function () {
 			this._div = L.DomUtil.create("div", "info");
 			this.update();
 			return this._div;
 		};
 
-		info.update = function(props) {
+		info.update = function (props: any) {
 			this._div.innerHTML =
 				"<h4>Pays de la Loire</h4>" +
 				(props ? "<b>" + props.nom + "</b><br />" : "");
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
 
 		this.http.get("assets/departements.json").subscribe((json: any) => {
 			geojson = L.geoJSON(json, {
-				style: function(feature) {
+				style: function (feature) {
 					switch (feature.properties.code) {
 						case "44":
 							return {
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
 							};
 					}
 				},
-				onEachFeature: function onEachFeature(feature, layer) {
+				onEachFeature: function onEachFeature(feature, layer: L.Layer) {
 					layer.on({
 						mouseover: highlightFeature,
 						mouseout: resetHighlight,
