@@ -118,6 +118,8 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "angular-choropleth"
+  },
+  "cli": {
+    "analytics": false
+  }
 }
